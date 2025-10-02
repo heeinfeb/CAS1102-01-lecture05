@@ -7,27 +7,19 @@
 void decode_steganography(int image_data[], int data_size, std::string key) {
 
     int currentIndex = 1000;
+    int keyIndex = 0;
 
-    // TODO: Implement the solve_steganography function.
-    /**
-     * Implement a loop to decrypt the message, starting from index 1000.
-     *
-     * Every character is just a number (its ASCII code).
-     * Type casting allows you to switch between these two views.
-     *
-     * - To get a number from a character: (int)key_char
-     *   Example: (int)'A' results in the integer 65.
-     * - To get a character from a number: (char)secret_value
-     *   Example: (char)65 results in the character 'A'.
-     *
-     * The decryption process is as follows:
-     * - Use the ASCII value of the repeating `key` characters to determine the jump distance.
-     *   (Hint: use the modulo '%' operator).
-     * - Update your current index with the jump distance, then read the value from `image_data`.
-     *   Remember to always stay within the array bounds!
-     * - If the value is 0, stop the loop. Otherwise, cast the value to a `char` and print it.
-     */
-
+    while (true) {
+        if (currentIndex < 0 || currentIndex >= data_size) {
+            std::cerr << "\n[Error] Index out of bounds!" << std::endl;
+            break;
+        }
+        int value = image_data[currentIndex];
+        if (value == 0) break;
+        std::cout << (char)value;
+        currentIndex += (int)key[keyIndex];
+        keyIndex = (keyIndex + 1) % key.size();
+    }
 }
 
 
